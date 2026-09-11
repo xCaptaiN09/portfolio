@@ -1,14 +1,5 @@
 import { PortraitPlate } from './PortraitPlate'
 
-const HERO_SPECS = [
-  'RMX3031',
-  'MT6893 / cupida',
-  'Linux 4.19',
-  'KernelSU-Next',
-  'SuSFS',
-  'AOSP / Lineage / ColorOS',
-]
-
 const HERO_MARQUEE = [
   'Muhammed Dilshad',
   'Android Kernel Developer',
@@ -33,21 +24,20 @@ export function Hero() {
 
         <h1 className="hero__title">
           <span className="mask-line"><span>Muhammed</span></span>
-          <span className="mask-line"><span>Dilshad A</span></span>
+          <span className="mask-line"><span className="name-outline">Dilshad A</span></span>
         </h1>
 
-        <div className="hero__topline">ANDROID KERNEL DEVELOPER / AI & DATA SCIENCE STUDENT</div>
-
         <div className="hero__role">
-          Systems/kernel developer first. Web/AI developer second.<br />
-          Kozhikode, IN — GitHub: xCaptaiN09
+          Android kernel developer — AI & Data Science student, Kozhikode IN
         </div>
       </div>
 
-      <div className="hero__specs">
-        {HERO_SPECS.map((item) => (
-          <span key={item}>{item}</span>
-        ))}
+      <div className="hero__foot">
+        <span>/ 2026 /</span>
+        <span>Scroll down</span>
+        <a className="hero__cta" href="mailto:hello.dilshad.in@gmail.com">
+          LET'S TALK <span>↗</span>
+        </a>
       </div>
 
       <div className="marquee marquee--hero marquee--reverse" aria-hidden="true">

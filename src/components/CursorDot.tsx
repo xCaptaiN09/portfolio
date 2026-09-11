@@ -22,7 +22,7 @@ export function CursorDot() {
     const loop = () => {
       x += (targetX - x) * 0.18
       y += (targetY - y) * 0.18
-      el.style.transform = `translate3d(${x - 4}px, ${y - 4}px, 0)`
+      el.style.transform = `translate3d(${x - 6}px, ${y - 6}px, 0)`
       raf = requestAnimationFrame(loop)
     }
 
