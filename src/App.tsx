@@ -13,6 +13,7 @@ import { RecordSection } from './components/RecordSection'
 import { SiteFooter } from './components/SiteFooter'
 import { Skills } from './components/Skills'
 import { Statement } from './components/Statement'
+import { CursorDot } from './components/CursorDot'
 import { WebGLLayer } from './components/WebGLLayer'
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
       <BackgroundVideo />
       <WebGLLayer />
       <div className="noise" />
+      <CursorDot />
       <Header />
 
       <main id="top" className="page">
