@@ -2,7 +2,15 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { getScrollProgress } from '../utils/scrollProgress'
-interface DustFieldProps { count: number; color: string; size: number; opacity: number; speed: number }
+
+interface DustFieldProps {
+  count: number
+  color: string
+  size: number
+  opacity: number
+  speed: number
+}
+
 function DustField({ count, color, size, opacity, speed }: DustFieldProps) {
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3)
@@ -15,14 +23,22 @@ function DustField({ count, color, size, opacity, speed }: DustFieldProps) {
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     return geo
   }, [count])
+
   const ref = useRef<THREE.Points>(null)
+
   useFrame(({ clock }) => {
     if (!ref.current) return
     ref.current.rotation.y = clock.elapsedTime * speed + getScrollProgress() * 0.4
     ref.current.rotation.x = Math.sin(clock.elapsedTime * 0.12) * 0.04
   })
-  return (<points ref={ref} geometry={geometry}><pointsMaterial color={color} size={size} transparent opacity={opacity} sizeAttenuation /></points>)
+
+  return (
+    <points ref={ref} geometry={geometry}>
+      <pointsMaterial color={color} size={size} transparent opacity={opacity} sizeAttenuation />
+    </points>
+  )
 }
+
 function Scene() {
   useFrame(({ camera }) => {
     const p = getScrollProgress()
@@ -31,8 +47,27 @@ function Scene() {
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, 8 - p * 1.5, 0.05)
     camera.lookAt(0, 0, 0)
   })
-  return (<group><DustField count={900} color="#ff4d00" size={0.025} opacity={0.5} speed={0.018} /><DustField count={500} color="#ffffff" size={0.018} opacity={0.18} speed={-0.01} /></group>)
+
+  return (
+    <group>
+      <DustField count={coarse ? 300 : 900} color="#ff4d00" size={0.025} opacity={0.5} speed={0.018} />
+      <DustField count={coarse ? 150 : 500} color="#ffffff" size={0.018} opacity={0.18} speed={-0.01} />
+    </group>
+  )
 }
+
+const coarse = window.matchMedia('(pointer: coarse)').matches
+
 export function WebGLLayer() {
-  return (<div className="webgl"><Canvas camera={{ position: [0, 0.4, 8], fov: 48 }} dpr={[1, 1.75]} gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}><Scene /></Canvas></div>)
+  return (
+    <div className="webgl">
+      <Canvas
+        camera={{ position: [0, 0.4, 8], fov: 48 }}
+        dpr={coarse ? [1, 1.25] : [1, 1.75]}
+        gl={{ antialias: !coarse, alpha: true, powerPreference: 'high-performance' }}
+      >
+        <Scene />
+      </Canvas>
+    </div>
+  )
 }
