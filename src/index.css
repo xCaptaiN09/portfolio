@@ -1590,3 +1590,152 @@ html {
 .hero-portrait__caption {
   color: rgba(11, 11, 12, .62);
 }
+
+.hero__title {
+  font-size: clamp(56px, 9.5vw, 176px);
+}
+
+.hero__topline {
+  font-size: 13px;
+}
+
+.hero__meta {
+  font-size: 13px;
+}
+
+.statement__copy {
+  font-size: clamp(40px, 7.4vw, 124px);
+}
+
+.skills h2,
+.projects h2,
+.contact h2,
+.freelance h2,
+.record h2 {
+  font-size: clamp(48px, 10vw, 170px);
+}
+
+.project-card h3 {
+  font-size: clamp(34px, 4.6vw, 72px);
+}
+
+.site-header {
+  width: min(1440px, calc(100vw - 48px));
+}
+
+.nav-links {
+  font-size: 12px;
+}
+
+.logo {
+  font-size: 13px;
+}
+
+.header-cta {
+  font-size: 12px;
+  height: 44px;
+}
+
+.hero::before {
+  content: 'MT6893';
+  position: absolute;
+  top: 170px;
+  left: clamp(18px, 5vw, 72px);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(80px, 12vw, 200px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(0, 0, 0, .28);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero__title {
+  font-size: clamp(56px, 10.5vw, 190px);
+}
+
+.hero-portrait {
+  width: clamp(300px, 26vw, 460px);
+  top: 110px;
+}
+
+.hero__topline {
+  font-size: 14px;
+}
+
+.hero__meta {
+  font-size: 14px;
+}
+
+.scroll-ring {
+  width: 140px;
+  height: 140px;
+}
+
+.scroll-ring svg {
+  width: 140px;
+  height: 140px;
+}
+
+.stat strong {
+  font-size: clamp(28px, 4.5vw, 64px);
+}
+
+.stat span {
+  font-size: 12px;
+}
+
+.skill-row {
+  padding: 32px 0;
+}
+
+.skill-tags span {
+  font-size: 12px;
+}
+
+.project-card p {
+  font-size: 17px;
+}
+
+.project-card__meta span {
+  font-size: 12px;
+}
+
+.client-card p {
+  font-size: 17px;
+}
+
+.client-card__index {
+  font-size: 14px;
+}
+
+.record-row {
+  padding: 26px 0;
+}
+
+.record-row__kind {
+  font-size: 12px;
+}
+
+.record-row__status {
+  font-size: 12px;
+}
+
+.contact__email {
+  font-size: clamp(20px, 3.2vw, 56px);
+}
+
+.footer-cols {
+  font-size: 14px;
+}
+
+.footer-meta {
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .hero::before {
+    display: none;
+  }
+}
