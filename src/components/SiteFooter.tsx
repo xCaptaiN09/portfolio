@@ -4,18 +4,9 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-socials">
-        <a href="https://github.com/xCaptaiN09" target="_blank" rel="noreferrer">
-          {'{GitHub'}
-          <span className="nav-sup">*</span>
-        </a>
-        <a href="https://linkedin.com/in/muhammed-dilshad-a-809311326" target="_blank" rel="noreferrer">
-          {'{LinkedIn'}
-          <span className="nav-sup">//</span>
-        </a>
-        <a href="mailto:hello.dilshad.in@gmail.com">
-          {'{Mail'}
-          <span className="nav-sup">+</span>
-        </a>
+        <a href="https://github.com/xCaptaiN09" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://linkedin.com/in/muhammed-dilshad-a-809311326" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:hello.dilshad.in@gmail.com">Mail</a>
       </div>
 
       <div className="footer-cols">
