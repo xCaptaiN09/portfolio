@@ -1,0 +1,10 @@
+export interface Project { name: string; desc: string; meta: string[] }
+export const projects: Project[] = [
+  { name: 'Custom Android Kernel', desc: 'Maintaining a custom Linux 4.19 kernel across four active branches serving AOSP, LineageOS, and stock ColorOS 16 builds for the MT6893 (cupida) platform. Integrated KernelSU-Next, backported SuSFS, migrated the toolchain to AOSP Clang, and fixed a boot-loop regression.', meta: ['RMX3031', 'MT6893', 'Linux 4.19', 'KernelSU-Next', 'SuSFS'] },
+  { name: 'pixie-sddm', desc: 'QML-based SDDM login theme inspired by Material Design 3, distributed through AUR, KDE Store, and Nix flakes. Two sibling themes, glyph-sddm and echo-sddm, hold a combined 70+ more stars.', meta: ['300+ stars', '17 forks', 'QML', 'AUR', 'glyph + echo sddm'] },
+  { name: 'hermes-hyprland-plugin', desc: 'C++ Hyprland compositor plugin with a Python D-Bus / AT-SPI coordinate-fusion engine, enabling pixel-perfect AI agent automation on Wayland desktops.', meta: ['C++', 'Python', 'Wayland', 'Hyprland'] },
+  { name: 'Upstream Contributions', desc: 'Patched libfprint for FocalTech FT9365 support, merged upstream as MR #554 and published as the AUR package libfprint-ft9365. Built sddm-fingerprint for parallel PAM fingerprint/password auth; SDDM upstream PR #2176 open.', meta: ['libfprint MR #554', 'AUR libfprint-ft9365', 'SDDM PR #2176', 'PAM'] },
+  { name: 'rmx3031-archive', desc: 'Community resource site hosting firmware, OTA updates, and flashing guides for three device lines. The primary reference for that device community.', meta: ['5 stars', 'Firmware', 'OTA', 'Guides'] },
+  { name: 'Sortify', desc: 'Magisk / KernelSU module that automatically organizes device storage by file type, with a native WebUI configuration panel.', meta: ['35 stars', 'Magisk', 'KernelSU', 'WebUI'] },
+  { name: 'gitfox', desc: 'Private GitHub Action that runs a local Ollama model for PR review and issue triage — no cloud LLM calls, no API keys.', meta: ['TypeScript', 'Ollama', 'GitHub Actions'] },
+]

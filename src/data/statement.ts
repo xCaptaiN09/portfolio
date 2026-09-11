@@ -1,0 +1,1 @@
+export const STATEMENT_WORDS = ['I', 'maintain', 'low-level', 'Android', 'systems', 'work:', 'kernels,', 'boot', 'fixes,', 'upstream', 'patches,', 'desktop', 'tools,', 'and', 'things', 'that', 'usually', 'stay']

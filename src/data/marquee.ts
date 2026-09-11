@@ -1,0 +1,1 @@
+export const MARQUEE_ITEMS = ['Android Kernel Developer', 'MT6893', 'Linux 4.19', 'KernelSU-Next', 'SuSFS', 'Open Source', 'AI & Data Science']
