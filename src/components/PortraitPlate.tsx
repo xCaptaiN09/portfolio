@@ -17,7 +17,7 @@ export function PortraitPlate() {
   return (
     <div className="hero-portrait" ref={ref}>
       <div className="hero-portrait__plate">
-        <img src="/portrait.webp" alt="Muhammed Dilshad A" />
+        <img src={`${import.meta.env.BASE_URL}portrait.webp`} alt="Muhammed Dilshad A" />
       </div>
       <div className="hero-portrait__caption">// Muhammed Dilshad — Kozhikode, IN</div>
     </div>
