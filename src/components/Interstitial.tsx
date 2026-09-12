@@ -1,10 +1,14 @@
+import { AsciiFlow } from './AsciiFlow'
+
 export function Interstitial() {
   return (
-    <section className="interstitial" data-header="light">
-      <div>
-        <h2>4.19™</h2>
-        <p>Linux 4.19 / RMX3031 / MT6893 / AOSP / LineageOS / ColorOS 16</p>
-      </div>
+    <section className="interstitial">
+      <AsciiFlow />
+      <h2>
+        <span>LINUX <em>4.19</em> /</span>
+        <span>RMX3031 / MT6893 /</span>
+        <span>AOSP / LINEAGEOS / COLOROS 16</span>
+      </h2>
     </section>
   )
 }
