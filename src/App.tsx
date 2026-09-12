@@ -8,6 +8,7 @@ import { Hero } from './components/Hero'
 import { Interstitial } from './components/Interstitial'
 import { MarqueeBand } from './components/MarqueeBand'
 import { Preloader } from './components/Preloader'
+import { MarksSection } from './components/MarksSection'
 import { ProjectsSection } from './components/ProjectsSection'
 import { RecordSection } from './components/RecordSection'
 import { SiteFooter } from './components/SiteFooter'
@@ -34,7 +35,8 @@ export default function App() {
         <Statement />
         <Interstitial />
         <Skills />
-        <ProjectsSection />
+        <MarksSection />
+      <ProjectsSection />
         <ClientWork />
         <RecordSection />
         <MarqueeBand />

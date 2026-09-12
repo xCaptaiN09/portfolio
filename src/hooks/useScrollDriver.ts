@@ -52,8 +52,8 @@ export function useScrollDriver() {
         [Math.max(0, a - vh * 0.85), 0.5],
         [Math.max(0, a - vh * 0.25), 0.2],
         [Math.max(0, p - vh * 0.85), 0.2],
-        [Math.max(0, p - vh * 0.3), 0.38],
-        [Math.max(0, c - vh * 0.85), 0.38],
+        [Math.max(0, p - vh * 0.3), 0.14],
+        [Math.max(0, c - vh * 0.85), 0.14],
         [Math.max(0, c - vh * 0.3), 0.68],
         [Number.POSITIVE_INFINITY, 0.68],
       ]

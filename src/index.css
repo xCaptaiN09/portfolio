@@ -2950,3 +2950,299 @@ html {
   line-height: 1.18;
   letter-spacing: -.015em;
 }
+
+.hero__mountain img {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__mountain__base {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(1.6px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 6%);
+}
+
+.hero__mountain__edge {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(9px);
+  -webkit-mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 36%, #000 78%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+  mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 36%, #000 78%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.hero__mountain img.hero__mountain__base {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(1.6px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 6%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 6%);
+}
+
+.hero__mountain img.hero__mountain__edge {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(9px);
+  -webkit-mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 36%, #000 78%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+  mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 36%, #000 78%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+.hero__mountain img.hero__mountain__base {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(1px);
+}
+
+.hero__mountain img.hero__mountain__edge {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(6.5px);
+  -webkit-mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 42%, #000 80%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+  mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 42%, #000 80%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+}
+
+.hero__mountain img.hero__mountain__base {
+  filter: grayscale(1) brightness(.75) contrast(1.1);
+}
+
+.hero__mountain img.hero__mountain__edge {
+  filter: grayscale(1) brightness(.75) contrast(1.1) blur(8px);
+  -webkit-mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 40%, #000 82%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+  mask-image:
+    radial-gradient(120% 95% at 50% 45%, transparent 40%, #000 82%),
+    linear-gradient(to bottom, transparent 0, #000 6%);
+}
+
+.projects {
+  height: 420vh;
+}
+
+.projects__panel {
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  color: #0b0b0c;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 110px;
+  will-change: transform;
+}
+
+.projects__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 clamp(18px, 5vw, 72px);
+  padding-right: calc(clamp(18px, 5vw, 72px) + 170px);
+}
+
+.projects__head h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(44px, 7vw, 132px);
+  line-height: .92;
+  color: #0b0b0c;
+  text-transform: uppercase;
+}
+
+.projects__label {
+  color: rgba(11, 11, 12, .6);
+}
+
+.projects__info {
+  max-width: 460px;
+}
+
+.projects__count {
+  color: #0b0b0c;
+}
+
+.projects__desc {
+  color: rgba(11, 11, 12, .78);
+}
+
+.projects__meta span {
+  border-color: rgba(11, 11, 12, .35);
+  color: rgba(11, 11, 12, .8);
+}
+
+.project-track {
+  padding: 0 clamp(18px, 5vw, 72px) 10vh;
+}
+
+.project-panel {
+  border-right-color: rgba(11, 11, 12, .25);
+}
+
+.project-panel__num {
+  color: rgba(11, 11, 12, .65);
+}
+
+.project-panel h3 {
+  color: #0b0b0c;
+}
+
+.projects__orb {
+  position: absolute;
+  top: 96px;
+  right: clamp(18px, 5vw, 72px);
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .projects {
+    height: auto;
+  }
+
+  .projects__panel {
+    position: static;
+    transform: none !important;
+    padding-top: 90px;
+  }
+
+  .projects__head {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: clamp(18px, 5vw, 72px);
+  }
+
+  .projects__orb {
+    width: 90px;
+    height: 90px;
+    top: 84px;
+  }
+}
+
+.projects__panel {
+  overflow: hidden;
+}
+
+.projects__teaser {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 0 clamp(18px, 5vw, 72px);
+}
+
+.projects__teaser .section-label {
+  color: rgba(237, 236, 228, .8);
+}
+
+.projects__teaser-line {
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: rgba(237, 236, 228, .5);
+}
+
+@media (max-width: 900px) {
+  .projects__teaser {
+    display: none;
+  }
+}
+
+.marks {
+  position: relative;
+  min-height: 100vh;
+  background: #0b0b0c;
+  overflow: hidden;
+}
+
+.marks__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.marks__statement {
+  position: absolute;
+  top: clamp(84px, 11vh, 130px);
+  left: clamp(18px, 5vw, 72px);
+  max-width: 640px;
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(19px, 2.1vw, 29px);
+  line-height: 1.4;
+  letter-spacing: -.015em;
+  color: var(--cream);
+}
+
+.marks__scroll {
+  position: absolute;
+  left: 11%;
+  top: 55%;
+  background: var(--orange);
+  color: #0b0b0c;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  padding: 5px 9px;
+}
+
+.marks__year {
+  position: absolute;
+  right: clamp(18px, 5vw, 72px);
+  top: 50%;
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: rgba(237, 236, 228, .4);
+}
+
+.marks__word {
+  position: absolute;
+  left: clamp(18px, 5vw, 72px);
+  bottom: clamp(20px, 5vh, 56px);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 700;
+  font-size: clamp(52px, 9vw, 168px);
+  line-height: .9;
+  letter-spacing: -.035em;
+  color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .marks__statement {
+    max-width: 78vw;
+  }
+
+  .marks__scroll {
+    display: none;
+  }
+}
+
+.projects {
+  margin-top: -35vh;
+}
+
+.projects__panel {
+  inset: 38px;
+  border-radius: 32px;
+}
+
+@media (max-width: 900px) {
+  .projects {
+    margin-top: 0;
+  }
+
+  .projects__panel {
+    inset: auto;
+    margin: 0 14px 40px;
+    border-radius: 24px;
+  }
+}

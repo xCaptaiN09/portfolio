@@ -14,7 +14,8 @@ export function Hero() {
   return (
     <section className="section hero hero--dark">
       <div className="hero__mountain" aria-hidden="true">
-        <img src={`${import.meta.env.BASE_URL}mountain.webp`} alt="" />
+        <img className="hero__mountain__base" src={`${import.meta.env.BASE_URL}mountain.webp`} alt="" />
+        <img className="hero__mountain__edge" src={`${import.meta.env.BASE_URL}mountain.webp`} alt="" />
       </div>
 
       <PortraitPlate />
