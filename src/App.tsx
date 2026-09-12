@@ -1,3 +1,4 @@
+import { useLenis } from "./hooks/useLenis"
 import { useScrollDriver } from './hooks/useScrollDriver'
 import { useTextMotion } from './hooks/useTextMotion'
 import { BackgroundVideo } from './components/BackgroundVideo'
@@ -5,6 +6,7 @@ import { ClientWork } from './components/ClientWork'
 import { Contact } from './components/Contact'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { BrandFlyer } from './components/BrandFlyer'
 import { Interstitial } from './components/Interstitial'
 import { MarqueeBand } from './components/MarqueeBand'
 import { Preloader } from './components/Preloader'
@@ -18,6 +20,7 @@ import { CursorDot } from './components/CursorDot'
 import { WebGLLayer } from './components/WebGLLayer'
 
 export default function App() {
+  useLenis()
   useTextMotion()
   useScrollDriver()
 
@@ -32,6 +35,7 @@ export default function App() {
 
       <main id="top" className="page">
         <Hero />
+      <BrandFlyer />
         <Statement />
         <Interstitial />
         <Skills />

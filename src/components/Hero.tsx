@@ -22,11 +22,17 @@ export function Hero() {
 
       <div className="hero__core">
         <div className="hero__tag">( About me )</div>
-        <h1 className="hero__statement">
-          <span>I'm Muhammed Dilshad —</span>
-          <span>student by day,</span>
-          <span>maintainer by night<em>.</em></span>
-        </h1>
+        <div className="hero__core-col">
+          <h1 className="hero__statement">
+            <span>I'm Muhammed Dilshad —</span>
+            <span>student by day,</span>
+            <span>maintainer by night<em>.</em></span>
+          </h1>
+          <div className="hero__brand">
+            <span className="dot" />
+            <span>xCaptaiN09</span>
+          </div>
+        </div>
       </div>
 
       <div className="hero__foot">
