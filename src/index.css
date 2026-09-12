@@ -2888,3 +2888,65 @@ html {
 .interstitial h2 {
   text-shadow: 0 2px 28px rgba(20, 4, 0, .45);
 }
+
+.interstitial h2 {
+  font-family: 'Instrument Sans', 'Geist', sans-serif;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  font-size: clamp(34px, 6.6vw, 124px);
+}
+
+.hero--dark .hero__title,
+.marquee--hero .marquee__group {
+  font-family: 'Instrument Sans', 'Geist', sans-serif;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.interstitial h2 {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: -.03em;
+  font-size: clamp(34px, 6.6vw, 124px);
+}
+
+.hero--dark .hero__title {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.marquee--hero .marquee__group {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.statement__copy {
+  font-family: 'Geist', sans-serif;
+}
+
+.skills h2,
+.projects h2,
+.freelance h2,
+.record h2,
+.contact h2,
+.skill-row__title,
+.client-card h3,
+.footer-socials a,
+.marquee__group {
+  font-family: 'Archivo Black', sans-serif;
+}
+
+.interstitial h2,
+.hero--dark .hero__title,
+.marquee--hero .marquee__group {
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 700;
+}
+
+.interstitial h2 {
+  font-size: clamp(30px, 4.2vw, 78px);
+  line-height: 1.18;
+  letter-spacing: -.015em;
+}

@@ -5,9 +5,9 @@ export function Interstitial() {
     <section className="interstitial">
       <AsciiFlow />
       <h2>
-        <span>LINUX <em>4.19</em> /</span>
-        <span>RMX3031 / MT6893 /</span>
-        <span>AOSP / LINEAGEOS / COLOROS 16</span>
+        <span>BUILD LOW. <em>*</em></span>
+        <span>BREAK NOTHING. <em>#</em></span>
+        <span>SHIP SILENT. <em>™</em></span>
       </h2>
     </section>
   )
