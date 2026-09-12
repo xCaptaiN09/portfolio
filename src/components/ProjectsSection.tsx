@@ -20,12 +20,12 @@ export function ProjectsSection() {
       const scrollable = el.offsetHeight - window.innerHeight
       const p = clamp(-rect.top / scrollable)
 
-      const enter = Math.min(1, p / 0.14)
-      const eased = 1 - Math.pow(1 - enter, 3)
+      const enter = Math.min(1, p / 0.3)
+      const eased = enter < 0.5 ? 4 * enter * enter * enter : 1 - Math.pow(-2 * enter + 2, 3) / 2
       setPanelX((1 - eased) * 110)
       document.documentElement.style.setProperty('--projects-enter', String(eased))
 
-      const tp = clamp((p - 0.14) / 0.86)
+      const tp = clamp((p - 0.30) / 0.70)
       const maxMove = Math.max(0, track.scrollWidth - window.innerWidth)
       setTrackX(-tp * maxMove)
       setIndex(Math.max(0, Math.min(projects.length - 1, Math.round(tp * (projects.length - 1)))))
