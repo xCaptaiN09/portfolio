@@ -31,6 +31,10 @@ npm run build
 
 Automated via GitHub Actions, compiling and deploying directly to GitHub Pages on every push to `main`.
 
+### Credits
+
+Design layout inspired by [Benjamin Hoang](https://www.awwwards.com/benjamin-hoang/).
+
 ### License
 
 Released under the [MIT License](LICENSE). Copyright (c) 2026 Muhammed Dilshad A.
