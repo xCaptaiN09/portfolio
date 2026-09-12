@@ -2555,3 +2555,51 @@ html {
     animation: kenBurns 42s ease-in-out infinite;
   }
 }
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero--dark {
+    padding-top: 110px;
+  }
+
+  .hero--dark .hero-portrait {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: min(72vw, 380px);
+    margin: 0 auto 40px;
+  }
+
+  .hero__core {
+    max-width: none;
+    margin-left: 0;
+  }
+
+  .hero--dark .hero__title {
+    font-size: clamp(40px, 11vw, 96px);
+  }
+
+  .hero__foot {
+    flex-wrap: wrap;
+    gap: 12px;
+    bottom: 112px;
+  }
+
+  .project-card {
+    height: auto;
+    min-height: 420px;
+    padding-bottom: 28px;
+  }
+
+  .project-card h3 {
+    font-size: clamp(26px, 8vw, 40px);
+  }
+
+  .project-card p {
+    font-size: 15px;
+  }
+}
