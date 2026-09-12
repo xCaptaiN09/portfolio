@@ -2603,3 +2603,16 @@ html {
     font-size: 15px;
   }
 }
+
+@media (max-width: 900px) {
+  .hero-portrait {
+    display: block;
+  }
+
+  .hero-portrait__plate {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    aspect-ratio: 16 / 10;
+  }
+}
