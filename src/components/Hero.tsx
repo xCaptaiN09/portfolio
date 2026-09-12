@@ -37,7 +37,7 @@ export function Hero() {
         </a>
       </div>
 
-      <div className="marquee marquee--hero marquee--reverse" aria-hidden="true">
+      <div className="marquee marquee--hero" aria-hidden="true">
         <div className="marquee__track">
           <div className="marquee__group">
             {HERO_MARQUEE.map((item) => (
