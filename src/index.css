@@ -2536,3 +2536,22 @@ html {
     transform: scale(1.16) translate3d(-1.5%, 1%, 0);
   }
 }
+
+.bg-still--kenburns {
+  animation: kenBurns 42s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (pointer: coarse), (max-width: 900px) {
+  .bg-video video {
+    display: block;
+  }
+
+  .bg-still {
+    animation: none;
+  }
+
+  .bg-still--kenburns {
+    animation: kenBurns 42s ease-in-out infinite;
+  }
+}
