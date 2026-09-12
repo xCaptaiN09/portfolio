@@ -3362,3 +3362,142 @@ html {
 .projects {
   margin-top: -196vh;
 }
+
+.project-panel {
+  width: max-content;
+  max-width: 46vw;
+}
+
+@media (max-width: 900px) {
+  .project-panel {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.project-panel {
+  max-width: none;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(32px, 6vw, 96px);
+}
+
+.footer-logo {
+  opacity: .3;
+  transition: opacity .3s ease;
+}
+
+.footer-logo:hover {
+  opacity: 1;
+}
+
+.footer-logo img {
+  display: block;
+  width: clamp(120px, 13vw, 210px);
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .footer-right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+}
+
+.footer-logo img {
+  width: clamp(160px, 15vw, 250px);
+}
+
+.footer-logo {
+  width: clamp(100px, 9vw, 150px);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  opacity: .3;
+  transition: opacity .3s ease;
+}
+
+.footer-logo img {
+  width: 240%;
+  max-width: none;
+}
+
+.footer-logo {
+  width: auto;
+  aspect-ratio: auto;
+  overflow: visible;
+}
+
+.footer-logo img {
+  width: clamp(140px, 13vw, 220px);
+  max-width: clamp(140px, 13vw, 220px);
+}
+
+.footer-logo {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: clamp(110px, 10vw, 170px);
+  aspect-ratio: auto;
+}
+
+.footer-logo img {
+  position: absolute;
+  max-width: none;
+  width: auto;
+}
+
+.footer-right {
+  padding-right: clamp(28px, 4.5vw, 80px);
+}
+
+.footer-logo {
+  width: clamp(96px, 8.5vw, 140px);
+}
+
+.footer-right {
+  gap: clamp(48px, 7vw, 120px);
+}
+
+section:has(.client-orb) {
+  position: relative;
+}
+
+.client-orb {
+  position: absolute;
+  top: clamp(84px, 12vh, 120px);
+  right: clamp(18px, 5vw, 72px);
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+}
+
+.client-orb canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Breathing space under CLIENT WORK heading */
+.client h2,
+.freelance h2 {
+  margin-bottom: clamp(48px, 8vh, 96px);
+}
+
+.project-track {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .client-orb {
+    width: 90px;
+    height: 90px;
+    top: 84px;
+  }
+}

@@ -1,7 +1,10 @@
+import { ClientOrb } from "./ClientOrb"
 import { clients } from '../data/clients'
 export function ClientWork() {
   return (
     <section id="client" className="section freelance" data-header="light">
+      <ClientOrb />
+      <ClientOrb />
       <div className="section-label">[ CLIENT WORK ]</div>
       <h2 className="pull-words">Client<br />Work</h2>
       <div className="freelance-grid">
