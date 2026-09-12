@@ -7,6 +7,7 @@ import { Contact } from './components/Contact'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { BrandFlyer } from './components/BrandFlyer'
+import { ScrollCursor } from './components/ScrollCursor'
 import { Interstitial } from './components/Interstitial'
 import { MarqueeBand } from './components/MarqueeBand'
 import { Preloader } from './components/Preloader'
@@ -36,6 +37,7 @@ export default function App() {
       <main id="top" className="page">
         <Hero />
       <BrandFlyer />
+      <ScrollCursor />
         <Statement />
         <Interstitial />
         <Skills />

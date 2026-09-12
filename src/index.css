@@ -3635,3 +3635,49 @@ section:has(.client-orb) {
 html {
   scroll-behavior: auto;
 }
+
+.marks__scroll {
+  display: none;
+}
+
+.scroll-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s ease;
+  will-change: transform;
+}
+
+.scroll-cursor__box {
+  display: block;
+  transform: translate(-50%, -50%);
+  background: var(--orange);
+  color: #0b0b0c;
+  font-family: 'Geist Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .08em;
+  padding: 5px 9px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+body[data-cursor="scroll"] .scroll-cursor {
+  opacity: 1;
+}
+
+body[data-cursor="scroll"] [class*="cursor"]:not(.scroll-cursor):not(.scroll-cursor__box) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+.scroll-cursor__box {
+  transition: background .18s ease, color .18s ease;
+}
+
+body[data-cursor-box="invert"] .scroll-cursor__box {
+  background: #0b0b0c;
+  color: var(--orange);
+}
