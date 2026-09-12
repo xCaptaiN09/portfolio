@@ -22,15 +22,11 @@ export function Hero() {
 
       <div className="hero__core">
         <div className="hero__tag">( About me )</div>
-
-        <h1 className="hero__title">
-          <span className="mask-line"><span>Muhammed</span></span>
-          <span className="mask-line"><span className="name-outline">Dilshad A</span></span>
+        <h1 className="hero__statement">
+          <span>I'm Muhammed Dilshad —</span>
+          <span>student by day,</span>
+          <span>maintainer by night<em>.</em></span>
         </h1>
-
-        <div className="hero__role">
-          Android kernel developer — AI & Data Science student, Kozhikode IN
-        </div>
       </div>
 
       <div className="hero__foot">
@@ -41,7 +37,7 @@ export function Hero() {
         </a>
       </div>
 
-      <div className="marquee marquee--hero" aria-hidden="true">
+      <div className="marquee marquee--hero marquee--reverse" aria-hidden="true">
         <div className="marquee__track">
           <div className="marquee__group">
             {HERO_MARQUEE.map((item) => (

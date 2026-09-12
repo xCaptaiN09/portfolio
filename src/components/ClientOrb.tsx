@@ -1,14 +1,15 @@
 import { useEffect, useRef } from 'react'
 
-const TAU = Math.PI * 2
+const CHEV: Array<[number, number]> = [[-0.3, -0.34], [0.07, 0], [-0.3, 0.34]]
+const BAR: Array<[number, number]> = [[0.11, 0.3], [0.43, 0.3]]
 
-interface Dot {
-  x: number
-  y: number
-  z: number
-  r: number
-  v: number
-  a?: number
+function segDist(px: number, py: number, ax: number, ay: number, bx: number, by: number) {
+  const dx = bx - ax
+  const dy = by - ay
+  const l2 = dx * dx + dy * dy
+  let u = l2 ? ((px - ax) * dx + (py - ay) * dy) / l2 : 0
+  u = u < 0 ? 0 : u > 1 ? 1 : u
+  return Math.hypot(px - (ax + dx * u), py - (ay + dy * u))
 }
 
 function proj(yaw: number, tilt: number, cx: number, cy: number, s: number) {
@@ -23,85 +24,6 @@ function proj(yaw: number, tilt: number, cx: number, cy: number, s: number) {
     const z2 = y * st + pz * ct
     return [cx + px * s, cy - py * s, z2]
   }
-}
-
-const rscale = (S: number) => Math.pow(S / 300, 0.6)
-
-function paint(
-  ctx: CanvasRenderingContext2D,
-  dots: Dot[],
-  accent: [number, number, number] | null,
-  sat: number,
-  rMin: number,
-) {
-  dots.sort((a, b) => a.z - b.z)
-  for (const d of dots) {
-    const al = d.a ?? 1
-    if (al < 0.02) continue
-    const v = Math.max(0, Math.min(1, d.v))
-    const g = v * 255
-    let r = g
-    let gg = g
-    let b = g
-    if (accent && sat) {
-      const lift = Math.min(1, v * 1.12)
-      r = g * (1 - sat) + accent[0] * lift * sat
-      gg = g * (1 - sat) + accent[1] * lift * sat
-      b = g * (1 - sat) + accent[2] * lift * sat
-    }
-    if (v > 0.85) {
-      const w = ((v - 0.85) / 0.15) * 0.45
-      r += (255 - r) * w
-      gg += (255 - gg) * w
-      b += (255 - b) * w
-    }
-    ctx.fillStyle = `rgba(${r | 0},${gg | 0},${b | 0},${al})`
-    ctx.beginPath()
-    ctx.arc(d.x, d.y, Math.max(rMin, d.r), 0, TAU)
-    ctx.fill()
-  }
-}
-
-function drawReact(ctx: CanvasRenderingContext2D, S: number, t: number, accent: [number, number, number]) {
-  const cx = S / 2
-  const cy = S / 2
-  const R = (S / 2) * 0.92
-  const rs = rscale(S)
-  const p = proj(0.1 * Math.sin(t * 0.4), 0.12 * Math.sin(t * 0.33), cx, cy, R)
-  const spin = t * 0.26
-  const rx = 0.94
-  const ry = 0.345
-  const per = 56
-  const dots: Dot[] = []
-  for (let k = 0; k < 3; k++) {
-    const a0 = spin + (k * Math.PI) / 3
-    const ca = Math.cos(a0)
-    const sa = Math.sin(a0)
-    const ring = (th: number): [number, number] => {
-      const ex = Math.cos(th) * rx
-      const ey = Math.sin(th) * ry
-      return [ex * ca - ey * sa, ex * sa + ey * ca]
-    }
-    for (let i = 0; i < per; i++) {
-      const th = (i / per) * TAU
-      const [gx, gy] = ring(th)
-      const [x, y, z] = p(gx, gy, 0)
-      const ph = (((th / TAU - t * 0.19 - k * 0.33) % 1) + 1) % 1
-      const crest = Math.exp(-Math.pow(ph - 0.5, 2) / 0.022)
-      dots.push({ x, y, z: z + crest * 0.01, r: (0.95 + 0.6 * crest) * rs, v: 0.66 + 0.3 * crest, a: 0.85 + 0.15 * crest })
-    }
-    const eth = t * (k % 2 ? -1.15 : 1.3) + k * 2.1
-    const [ex2, ey2] = ring(eth)
-    const [x2, y2, z2] = p(ex2, ey2, 0.04)
-    dots.push({ x: x2, y: y2, z: z2 + 0.02, r: 1.9 * rs, v: 0.95 })
-  }
-  for (let i = 0; i < 7; i++) {
-    const a = (i / 7) * TAU
-    const rr = i ? 0.085 : 0
-    const [x, y, z] = p(Math.cos(a) * rr, Math.sin(a) * rr, 0.05)
-    dots.push({ x, y, z: z + 0.03, r: 1.5 * rs, v: 0.9 })
-  }
-  paint(ctx, dots, accent, 0.88, 0.3)
 }
 
 export function ClientOrb() {
@@ -127,13 +49,66 @@ export function ClientOrb() {
     io.observe(canvas)
 
     const frame = (t: number) => {
+      const S = size
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-      ctx.clearRect(0, 0, size, size)
-      drawReact(ctx, size, t, [11, 11, 12])
+      ctx.clearRect(0, 0, S, S)
+      const cx = S / 2
+      const cy = S / 2
+      const R = (S / 2) * 0.92
+      const rs = Math.pow(S / 300, 0.6) * 1.7
+      const p = proj(0.13 * Math.sin(t * 0.42), 0.13 * Math.sin(t * 0.31), cx, cy, R)
+      const spin = t * 0.2
+      const amp = 0.1 + 0.03 * Math.sin(t * 1.15)
+      const rad = (th: number) => 0.76 * (1 + amp * Math.cos(6 * (th - spin)))
+      const gap = 0.112
+      const clr = 0.108
+      const chevD = (x: number, y: number) =>
+        Math.min(
+          segDist(x, y, CHEV[0][0], CHEV[0][1], CHEV[1][0], CHEV[1][1]),
+          segDist(x, y, CHEV[1][0], CHEV[1][1], CHEV[2][0], CHEV[2][1]),
+        )
+      const barD = (x: number, y: number) => segDist(x, y, BAR[0][0], BAR[0][1], BAR[1][0], BAR[1][1])
+
+      for (let gy = -1; gy <= 1; gy += gap) {
+        for (let gx = -1; gx <= 1; gx += gap) {
+          const d = Math.hypot(gx, gy)
+          if (!d || d > rad(Math.atan2(gy, gx))) continue
+          if (chevD(gx, gy) < clr || barD(gx, gy) < clr * 0.92) continue
+          const [x, y, z] = p(gx, -gy, 0)
+          const dep = (z + 1) / 2
+          ctx.fillStyle = `rgba(11, 11, 12, ${0.16 + 0.24 * dep})`
+          ctx.beginPath()
+          ctx.arc(x, y, Math.max(0.4, (0.9 + 1.05 * dep) * rs), 0, Math.PI * 2)
+          ctx.fill()
+        }
+      }
+
+      const ph = (((t / 1.15) % 1) + 1) % 1
+      const blink = ph < 0.58 ? 1 : ph < 0.68 ? 1 - (ph - 0.58) / 0.1 : ph < 0.9 ? 0 : (ph - 0.9) / 0.1
+      const step = 0.052
+      const glyph = (ax: number, ay: number, bx: number, by: number, alpha: number) => {
+        if (alpha < 0.02) return
+        const L = Math.hypot(bx - ax, by - ay)
+        const n = Math.max(2, Math.round(L / step))
+        for (let i = 0; i <= n; i++) {
+          const f = i / n
+          const gx = ax + (bx - ax) * f
+          const gy = ay + (by - ay) * f
+          const [x, y, z] = p(gx, -gy, 0.06)
+          const dep = (z + 1) / 2
+          ctx.fillStyle = `rgba(11, 11, 12, ${alpha})`
+          ctx.beginPath()
+          ctx.arc(x, y, Math.max(0.6, (1.15 + 1.1 * dep) * rs), 0, Math.PI * 2)
+          ctx.fill()
+        }
+      }
+      glyph(CHEV[0][0], CHEV[0][1], CHEV[1][0], CHEV[1][1], 1)
+      glyph(CHEV[1][0], CHEV[1][1], CHEV[2][0], CHEV[2][1], 1)
+      glyph(BAR[0][0], BAR[0][1], BAR[1][0], BAR[1][1], blink)
     }
 
     if (reduce) {
-      frame(1.2)
+      frame(0.4)
       return () => io.disconnect()
     }
     const loop = () => {

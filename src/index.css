@@ -3501,3 +3501,56 @@ section:has(.client-orb) {
     top: 84px;
   }
 }
+
+.hero__core {
+  position: absolute;
+  left: clamp(320px, 38vw, 46%);
+  right: clamp(24px, 6vw, 120px);
+  top: 21%;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(20px, 2.6vw, 48px);
+  text-align: left;
+}
+
+.hero__tag {
+  margin: 0;
+  padding-top: .65em;
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: rgba(237, 236, 228, .55);
+  white-space: nowrap;
+}
+
+.hero__statement {
+  font-family: 'Instrument Sans', 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: clamp(26px, 3.3vw, 60px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+
+.hero__statement span {
+  display: block;
+}
+
+.hero__statement em {
+  font-style: normal;
+  color: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .hero__core {
+    left: 18px;
+    right: 18px;
+    top: auto;
+    bottom: 32%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero__tag {
+    padding-top: 0;
+  }
+}
