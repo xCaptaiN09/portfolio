@@ -1,27 +1,36 @@
 # portfolio
 
-Brutalist portfolio of Muhammed Dilshad A (xCaptaiN09).
-Android kernel developer, AI & Data Science student.
+Brutalist personal portfolio for Muhammed Dilshad A ([@xCaptaiN09](https://github.com/xCaptaiN09)).
 
-## Stack
+**Live site:** [xcaptain09.github.io/portfolio](https://xcaptain09.github.io/portfolio/)
 
-React 18, TypeScript, Vite, Tailwind CSS, Three.js / React Three Fiber, GSAP.
+---
 
-## Local development
+### Tech Stack
 
-    git clone https://github.com/xCaptaiN09/portfolio.git
-    cd portfolio
-    npm install
-    npm run dev
+- **Core:** React 18, TypeScript, Vite
+- **Styling & Motion:** Tailwind CSS, GSAP
+- **3D / Graphics:** Three.js, React Three Fiber
 
-## Build
+### Getting Started
 
-    npm run build
+```bash
+git clone [https://github.com/xCaptaiN09/portfolio.git](https://github.com/xCaptaiN09/portfolio.git)
+cd portfolio
+npm install
+npm run dev
+```
 
-## Deploy
+### Build
 
-GitHub Actions builds and publishes to GitHub Pages on every push to main.
+```bash
+npm run build
+```
 
-## License
+### Deployment
 
-MIT (c) 2026 Muhammed Dilshad A
+Automated via GitHub Actions, compiling and deploying directly to GitHub Pages on every push to `main`.
+
+### License
+
+Released under the [MIT License](LICENSE). Copyright (c) 2026 Muhammed Dilshad A.
