@@ -2616,3 +2616,10 @@ html {
     aspect-ratio: 16 / 10;
   }
 }
+
+@media (max-width: 900px) {
+  .hero__foot {
+    position: static;
+    margin: 48px 0 140px;
+  }
+}
