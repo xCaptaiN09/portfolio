@@ -3246,3 +3246,111 @@ html {
     border-radius: 24px;
   }
 }
+
+.projects {
+  margin-top: -60vh;
+}
+
+:root {
+  --projects-enter: 0;
+}
+
+/* Fire page gets pushed sideways during the projects takeover */
+.marks {
+  z-index: 1;
+  transform:
+    translate3d(calc(var(--projects-enter) * -34vw), 0, 0)
+    scale(calc(1 - var(--projects-enter) * .035));
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Start the selected-build card on top of the fire section, not after it */
+.projects {
+  margin-top: -100vh;
+  position: relative;
+  z-index: 3;
+}
+
+/* Let only the orange card be the visible takeover layer */
+.projects__sticky {
+  pointer-events: none;
+}
+
+.projects__panel {
+  pointer-events: auto;
+  inset: 76px 38px 52px;
+  border-radius: 34px;
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, .32),
+    inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+/* Keep card content breathing after reducing height */
+.projects__panel {
+  padding-top: 86px;
+}
+
+.projects__head {
+  padding-right: calc(clamp(18px, 5vw, 72px) + 150px);
+}
+
+.projects__orb {
+  top: 78px;
+}
+
+.project-track {
+  padding-bottom: 7vh;
+}
+
+@media (max-width: 900px) {
+  .marks {
+    transform: none;
+  }
+
+  .projects {
+    margin-top: 0;
+  }
+
+  .projects__sticky {
+    pointer-events: auto;
+  }
+
+  .projects__panel {
+    inset: auto;
+    margin: 0 14px 40px;
+    border-radius: 24px;
+    padding-top: 84px;
+  }
+}
+
+.marks-wrap {
+  height: 200vh;
+}
+
+.marks {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 100vh;
+  opacity: calc(1 - max(0, (var(--projects-enter) - 0.75)) * 4);
+}
+
+.projects {
+  margin-top: -145vh;
+}
+
+@media (max-width: 900px) {
+  .marks-wrap {
+    height: auto;
+  }
+
+  .marks {
+    position: static;
+    opacity: 1;
+  }
+
+  .projects {
+    margin-top: 0;
+  }
+}

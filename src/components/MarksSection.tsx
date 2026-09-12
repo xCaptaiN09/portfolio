@@ -199,6 +199,7 @@ export function MarksSection() {
   }, [])
 
   return (
+    <div className="marks-wrap">
     <section className="marks">
       <canvas ref={canvasRef} className="marks__canvas" aria-hidden="true" />
       <p className="marks__statement">
@@ -209,5 +210,6 @@ export function MarksSection() {
       <span className="marks__year">/2026/</span>
       <div className="marks__word">xCaptaiN09</div>
     </section>
+    </div>
   )
 }

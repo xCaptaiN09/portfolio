@@ -22,7 +22,8 @@ export function ProjectsSection() {
 
       const enter = Math.min(1, p / 0.14)
       const eased = 1 - Math.pow(1 - enter, 3)
-      setPanelX((1 - eased) * 100)
+      setPanelX((1 - eased) * 110)
+      document.documentElement.style.setProperty('--projects-enter', String(eased))
 
       const tp = clamp((p - 0.14) / 0.86)
       const maxMove = Math.max(0, track.scrollWidth - window.innerWidth)
