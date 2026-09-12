@@ -2824,3 +2824,24 @@ html {
 .project-panel__tags {
   display: none;
 }
+
+.interstitial {
+  position: relative;
+}
+
+.voxel-flower {
+  position: absolute;
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(280px, 34vw, 620px);
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .voxel-flower {
+    display: none;
+  }
+}
