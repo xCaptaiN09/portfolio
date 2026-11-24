@@ -8,6 +8,7 @@ export function CursorDot() {
     if (!el) return
     if (window.matchMedia('(pointer: coarse)').matches) return
 
+    el.style.opacity = '0'
     let x = window.innerWidth / 2
     let y = window.innerHeight / 2
     let targetX = x
@@ -17,17 +18,18 @@ export function CursorDot() {
     const onMove = (event: MouseEvent) => {
       targetX = event.clientX
       targetY = event.clientY
+      el.style.opacity = '1'
+      if (!raf) raf = requestAnimationFrame(loop)
     }
 
     const loop = () => {
       x += (targetX - x) * 0.18
       y += (targetY - y) * 0.18
       el.style.transform = `translate3d(${x - 6}px, ${y - 6}px, 0)`
-      raf = requestAnimationFrame(loop)
+      raf = Math.abs(targetX - x) + Math.abs(targetY - y) > .3 ? requestAnimationFrame(loop) : 0
     }
 
     window.addEventListener('mousemove', onMove)
-    raf = requestAnimationFrame(loop)
 
     return () => {
       window.removeEventListener('mousemove', onMove)

@@ -1,3 +1,4 @@
+import { animateVisible } from '../utils/animateVisible'
 import { useEffect, useRef } from 'react'
 
 const CHEV: Array<[number, number]> = [[-0.3, -0.34], [0.07, 0], [-0.3, 0.34]]
@@ -39,14 +40,6 @@ export function ClientOrb() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
     canvas.width = Math.round(size * dpr)
     canvas.height = Math.round(size * dpr)
-
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    let raf = 0
-    let visible = true
-    const io = new IntersectionObserver((entries) => {
-      visible = entries[0].isIntersecting
-    })
-    io.observe(canvas)
 
     const frame = (t: number) => {
       const S = size
@@ -107,19 +100,7 @@ export function ClientOrb() {
       glyph(BAR[0][0], BAR[0][1], BAR[1][0], BAR[1][1], blink)
     }
 
-    if (reduce) {
-      frame(0.4)
-      return () => io.disconnect()
-    }
-    const loop = () => {
-      if (visible) frame(performance.now() / 1000)
-      raf = requestAnimationFrame(loop)
-    }
-    loop()
-    return () => {
-      cancelAnimationFrame(raf)
-      io.disconnect()
-    }
+    return animateVisible(canvas, frame, 0.4)
   }, [])
 
   return (

@@ -1,7 +1,6 @@
 import { useLenis } from "./hooks/useLenis"
 import { useScrollDriver } from './hooks/useScrollDriver'
 import { useTextMotion } from './hooks/useTextMotion'
-import { BackgroundVideo } from './components/BackgroundVideo'
 import { ClientWork } from './components/ClientWork'
 import { Contact } from './components/Contact'
 import { Header } from './components/Header'
@@ -18,7 +17,7 @@ import { SiteFooter } from './components/SiteFooter'
 import { Skills } from './components/Skills'
 import { Statement } from './components/Statement'
 import { CursorDot } from './components/CursorDot'
-import { WebGLLayer } from './components/WebGLLayer'
+import { PortfolioBackground } from './components/PortfolioBackground'
 
 export default function App() {
   useLenis()
@@ -28,21 +27,20 @@ export default function App() {
   return (
     <>
       <Preloader />
-      <BackgroundVideo />
-      <WebGLLayer />
+      <PortfolioBackground />
       <div className="noise" />
       <CursorDot />
       <Header />
 
       <main id="top" className="page">
         <Hero />
-      <BrandFlyer />
-      <ScrollCursor />
+        <BrandFlyer />
+        <ScrollCursor />
         <Statement />
         <Interstitial />
         <Skills />
         <MarksSection />
-      <ProjectsSection />
+        <ProjectsSection />
         <ClientWork />
         <RecordSection />
         <MarqueeBand />

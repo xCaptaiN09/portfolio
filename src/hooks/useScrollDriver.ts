@@ -5,7 +5,6 @@ import { setScrollProgress } from '../utils/scrollProgress'
 export function useScrollDriver() {
   useEffect(() => {
     let headerEl: HTMLElement | null = null
-    let mediaEls: HTMLElement[] = []
     let creamSections: HTMLElement[] = []
     let ticking = false
 
@@ -13,15 +12,7 @@ export function useScrollDriver() {
       const max = document.documentElement.scrollHeight - window.innerHeight
       setScrollProgress(max > 0 ? clamp(window.scrollY / max) : 0)
 
-      if (mediaEls.length === 0) {
-        mediaEls = Array.from(document.querySelectorAll<HTMLElement>('.bg-video video, .bg-video img'))
-      }
-      if (mediaEls.length > 0) {
-        const opacity = mediaOpacity(window.scrollY)
-        mediaEls.forEach((el) => {
-          el.style.opacity = opacity
-        })
-      }
+      document.documentElement.style.setProperty('--backdrop-opacity', mediaOpacity(window.scrollY))
 
       if (!headerEl) {
         headerEl = document.querySelector<HTMLElement>('.site-header')
@@ -80,7 +71,6 @@ export function useScrollDriver() {
 
     const rebuild = () => {
       creamSections = []
-      mediaEls = []
       update()
     }
 

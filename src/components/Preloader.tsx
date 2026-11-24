@@ -1,6 +1,6 @@
 export function Preloader() {
   return (
-    <div className="preloader">
+    <div className="preloader" aria-hidden="true">
       <div className="preloader__inner">
         <div className="preloader__line">[ 0.000000 ] Booting Linux on physical CPU 0x0</div>
         <div className="preloader__line">[ 0.014209 ] Linux version 4.19.282-xcaptain09</div>

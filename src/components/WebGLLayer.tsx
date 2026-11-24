@@ -14,10 +14,15 @@ interface DustFieldProps {
 function DustField({ count, color, size, opacity, speed }: DustFieldProps) {
   const geometry = useMemo(() => {
     const positions = new Float32Array(count * 3)
+    let seed = count
+    function sample() {
+      seed = (Math.imul(1664525, seed) + 1013904223) >>> 0
+      return seed / 0x100000000 - 0.5
+    }
     for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 32
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 18
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 24
+      positions[i * 3] = sample() * 32
+      positions[i * 3 + 1] = sample() * 18
+      positions[i * 3 + 2] = sample() * 24
     }
     const geo = new THREE.BufferGeometry()
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
@@ -58,10 +63,11 @@ function Scene() {
 
 const coarse = window.matchMedia('(pointer: coarse)').matches
 
-export function WebGLLayer() {
+export default function WebGLLayer({ active }: { active: boolean }) {
   return (
     <div className="webgl">
       <Canvas
+        frameloop={active ? 'always' : 'never'}
         camera={{ position: [0, 0.4, 8], fov: 48 }}
         dpr={coarse ? [1, 1.25] : [1, 1.75]}
         gl={{ antialias: !coarse, alpha: true, powerPreference: 'high-performance' }}

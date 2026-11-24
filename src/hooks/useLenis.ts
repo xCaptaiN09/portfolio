@@ -4,7 +4,7 @@ import 'lenis/dist/lenis.css'
 
 export function useLenis() {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return
 
     const lenis = new Lenis({
       lerp: 0.08,

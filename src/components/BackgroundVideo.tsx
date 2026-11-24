@@ -1,21 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 type BgMode = 'video' | 'anim' | 'still'
 
 function getMode(): BgMode {
   const param = new URLSearchParams(window.location.search).get('bg')
   if (param === 'video' || param === 'anim' || param === 'still') return param
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 'still'
   return window.matchMedia('(pointer: coarse)').matches ? 'anim' : 'video'
 }
 
-export function BackgroundVideo() {
-  const [mode] = useState<BgMode>(getMode)
+export function BackgroundVideo({ active, reduced }: { active: boolean; reduced: boolean }) {
+  const mode = reduced ? 'still' : getMode()
+  const video = useRef<HTMLVideoElement>(null)
+  useEffect(() => {
+    const el = video.current
+    if (!el) return
+    if (active) void el.play().catch(() => {})
+    else el.pause()
+  }, [active, mode])
 
   return (
-    <div className="bg-video" aria-hidden="true">
+    <div className="bg-video" hidden={!active} aria-hidden="true">
       {mode === 'video' && (
-        <video autoPlay muted loop playsInline disablePictureInPicture preload="metadata">
+        <video ref={video} muted loop playsInline disablePictureInPicture preload="none" poster={`${import.meta.env.BASE_URL}bg-poster.webp`}>
           <source src={`${import.meta.env.BASE_URL}bg.mp4`} type="video/mp4" />
         </video>
       )}

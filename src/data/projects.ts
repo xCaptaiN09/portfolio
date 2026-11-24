@@ -1,10 +1,55 @@
-export interface Project { name: string; desc: string; meta: string[] }
+export interface Project {
+  name: string
+  desc: string
+  meta: string[]
+  url: string
+  linkLabel?: string
+}
+
+const github = 'https://github.com/xCaptaiN09'
+
 export const projects: Project[] = [
-  { name: 'Custom Android Kernel', desc: 'Maintaining a custom Linux 4.19 kernel across four active branches serving AOSP, LineageOS, and stock ColorOS 16 builds for the MT6893 (cupida) platform. Integrated KernelSU-Next, backported SuSFS, migrated the toolchain to AOSP Clang, and fixed a boot-loop regression.', meta: ['RMX3031', 'MT6893', 'Linux 4.19', 'KernelSU-Next', 'SuSFS'] },
-  { name: 'pixie-sddm', desc: 'QML-based SDDM login theme inspired by Material Design 3, distributed through AUR, KDE Store, and Nix flakes. Two sibling themes, glyph-sddm and echo-sddm, hold a combined 70+ more stars.', meta: ['300+ stars', '17 forks', 'QML', 'AUR', 'glyph + echo sddm'] },
-  { name: 'hermes-hyprland-plugin', desc: 'C++ Hyprland compositor plugin with a Python D-Bus / AT-SPI coordinate-fusion engine, enabling pixel-perfect AI agent automation on Wayland desktops.', meta: ['C++', 'Python', 'Wayland', 'Hyprland'] },
-  { name: 'Upstream Contributions', desc: 'Patched libfprint for FocalTech FT9365 support, merged upstream as MR #554 and published as the AUR package libfprint-ft9365. Built sddm-fingerprint for parallel PAM fingerprint/password auth; SDDM upstream PR #2176 open.', meta: ['libfprint MR #554', 'AUR libfprint-ft9365', 'SDDM PR #2176', 'PAM'] },
-  { name: 'rmx3031-archive', desc: 'Community resource site hosting firmware, OTA updates, and flashing guides for three device lines. The primary reference for that device community.', meta: ['5 stars', 'Firmware', 'OTA', 'Guides'] },
-  { name: 'Sortify', desc: 'Magisk / KernelSU module that automatically organizes device storage by file type, with a native WebUI configuration panel.', meta: ['35 stars', 'Magisk', 'KernelSU', 'WebUI'] },
-  { name: 'gitfox', desc: 'Private GitHub Action that runs a local Ollama model for PR review and issue triage — no cloud LLM calls, no API keys.', meta: ['TypeScript', 'Ollama', 'GitHub Actions'] },
+  {
+    name: 'Custom Android Kernel',
+    desc: 'I maintain the Linux 4.19 kernel for the Realme X7 Max. The work spans AOSP and stock ColorOS builds, KernelSU-Next integration, SuSFS backports, and boot fixes.',
+    meta: ['RMX3031', 'MT6893', 'Linux 4.19'],
+    url: `${github}/android_kernel_oplus_mt6893`,
+  },
+  {
+    name: 'pixie-sddm',
+    desc: 'A Material Design 3 login screen for Linux desktops, built in QML and distributed through the AUR, KDE Store, and Nix flakes.',
+    meta: ['QML', 'SDDM', 'Nix'],
+    url: `${github}/pixie-sddm`,
+  },
+  {
+    name: 'hermes-hyprland-plugin',
+    desc: 'A Hyprland plugin that combines compositor coordinates with Linux accessibility data so desktop automation can locate controls on Wayland.',
+    meta: ['C++', 'Python', 'Wayland'],
+    url: `${github}/hermes-hyprland-plugin`,
+  },
+  {
+    name: 'Upstream contributions',
+    desc: 'My Linux fingerprint work includes FocalTech FT9365 support in libfprint and a patch for SDDM that lets you use a fingerprint or password at the same login prompt.',
+    meta: ['libfprint', 'SDDM', 'PAM'],
+    url: 'https://github.com/sddm/sddm/pull/2176',
+    linkLabel: 'Read the SDDM patch',
+  },
+  {
+    name: 'rmx3031-archive',
+    desc: 'A community archive of firmware, OTA updates, and flashing guides for Realme devices.',
+    meta: ['Firmware', 'OTA', 'Android'],
+    url: `${github}/rmx3031-archive`,
+  },
+  {
+    name: 'Sortify',
+    desc: 'A Magisk and KernelSU module that sorts device storage by file type, with a WebUI for choosing how files are organized.',
+    meta: ['Magisk', 'KernelSU', 'WebUI'],
+    url: `${github}/Sortify`,
+  },
+  {
+    name: 'gitfox',
+    desc: 'A GitHub Action for pull request reviews and issue triage. It runs a local Ollama model and keeps the review on your own machine.',
+    meta: ['TypeScript', 'Ollama', 'GitHub Actions'],
+    url: `${github}/gitfox`,
+  },
 ]

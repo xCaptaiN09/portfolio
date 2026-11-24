@@ -1,3 +1,4 @@
+import { animateVisible } from '../utils/animateVisible'
 import { useEffect, useRef } from 'react'
 
 const GITHUB_PATH =
@@ -124,14 +125,6 @@ export function GithubOrb() {
     canvas.height = Math.round(size * dpr)
 
     const pts = githubPts()
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    let raf = 0
-    let visible = true
-    const io = new IntersectionObserver((entries) => {
-      visible = entries[0].isIntersecting
-    })
-    io.observe(canvas)
-
     const frame = (t: number) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
       ctx.clearRect(0, 0, size, size)
@@ -147,19 +140,7 @@ export function GithubOrb() {
       paint(ctx, dots, [11, 11, 12], 0.9, 0.3)
     }
 
-    if (reduce) {
-      frame(1.1)
-      return () => io.disconnect()
-    }
-    const loop = () => {
-      if (visible) frame(performance.now() / 1000)
-      raf = requestAnimationFrame(loop)
-    }
-    loop()
-    return () => {
-      cancelAnimationFrame(raf)
-      io.disconnect()
-    }
+    return animateVisible(canvas, frame, 1.1)
   }, [])
 
   return <canvas ref={ref} style={{ width: '100%', height: '100%', display: 'block' }} />

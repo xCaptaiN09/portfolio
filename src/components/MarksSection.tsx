@@ -1,3 +1,4 @@
+import { animateVisible } from '../utils/animateVisible'
 import { useEffect, useRef } from 'react'
 
 const VS = `
@@ -149,7 +150,6 @@ export function MarksSection() {
     const timeLoc = gl.getUniformLocation(program, 'u_time')
 
     const coarse = window.matchMedia('(pointer: coarse)').matches
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1 : 1.5)
@@ -162,37 +162,19 @@ export function MarksSection() {
       }
     }
 
-    let paused = false
-    const io = new IntersectionObserver((entries) => {
-      paused = !entries[0].isIntersecting
-    })
-    io.observe(canvas)
-
-    const start = Date.now()
-    let raf = 0
-
-    const draw = (t: number) => {
+    const stop = animateVisible(canvas, (time) => {
+      resize()
       gl.uniform2f(resLoc, canvas.width, canvas.height)
-      gl.uniform1f(timeLoc, t)
+      gl.uniform1f(timeLoc, time)
       gl.clearColor(0, 0, 0, 0)
       gl.clear(gl.COLOR_BUFFER_BIT)
       gl.enable(gl.BLEND)
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-    }
-
-    const render = () => {
-      resize()
-      if (!paused) draw(reduce || coarse ? 2.2 : (Date.now() - start) / 1000)
-      if (!reduce && !coarse) raf = requestAnimationFrame(render)
-    }
-    render()
-    window.addEventListener('resize', resize)
+    }, 2.2)
 
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-      io.disconnect()
+      stop()
       gl.deleteBuffer(buf)
       if (program) gl.deleteProgram(program)
     }

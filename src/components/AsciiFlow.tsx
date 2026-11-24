@@ -1,3 +1,4 @@
+import { animateVisible } from '../utils/animateVisible'
 import { useEffect, useRef } from 'react'
 
 const CHARSET = ['-', '<', '>', '*', '+', '^', '#', '$']
@@ -129,8 +130,9 @@ export function AsciiFlow() {
     const resLoc = gl.getUniformLocation(program, 'u_resolution')
     const timeLoc = gl.getUniformLocation(program, 'u_time')
 
+    const maxDpr = window.matchMedia('(pointer: coarse)').matches ? 1 : 1.5
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+      const dpr = Math.min(window.devicePixelRatio || 1, maxDpr)
       const w = Math.floor(canvas.clientWidth * dpr)
       const h = Math.floor(canvas.clientHeight * dpr)
       if (w > 0 && h > 0 && (canvas.width !== w || canvas.height !== h)) {
@@ -140,33 +142,16 @@ export function AsciiFlow() {
       }
     }
 
-    let paused = false
-    const io = new IntersectionObserver((entries) => {
-      paused = !entries[0].isIntersecting
-    })
-    io.observe(canvas)
-
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const start = Date.now()
-    let raf = 0
-
-    const render = () => {
+    const stop = animateVisible(canvas, (time) => {
       resize()
-      if (!paused) {
-        gl.uniform2f(resLoc, canvas.width, canvas.height)
-        gl.uniform1f(timeLoc, reduce ? 4.2 : (Date.now() - start) / 1000)
-        gl.disable(gl.BLEND)
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-      }
-      if (!reduce) raf = requestAnimationFrame(render)
-    }
-    render()
-    window.addEventListener('resize', resize)
+      gl.uniform2f(resLoc, canvas.width, canvas.height)
+      gl.uniform1f(timeLoc, time)
+      gl.disable(gl.BLEND)
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+    }, 4.2)
 
     return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', resize)
-      io.disconnect()
+      stop()
       gl.deleteTexture(tex)
       gl.deleteBuffer(buf)
       if (program) gl.deleteProgram(program)
