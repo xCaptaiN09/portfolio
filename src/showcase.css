@@ -103,10 +103,24 @@
 .builds__details ul { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 18px 0; font: 12px 'Geist Mono', monospace; }
 .builds__details a { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; font-weight: 700; text-decoration: underline; text-underline-offset: .24em; }
 .builds__controls { border-top: 1px solid rgba(11,11,12,.4); padding-top: 14px; font: 14px 'Geist Mono', monospace; }
-.builds__controls div { display: flex; gap: 8px; }
-.builds__controls button { width: 46px; height: 44px; border: 1px solid currentColor; border-radius: 50%; font: 22px/1 'Geist', sans-serif; cursor: pointer; }
+.builds__progress { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 12px; }
+.builds__hint { display: none; font: 13px 'Geist', sans-serif; }
+.builds__buttons { display: flex; flex-shrink: 0; gap: 8px; }
+.builds__controls button { width: 46px; height: 44px; border: 1px solid rgba(11,11,12,.55); border-radius: 50%; font: 22px/1 'Geist', sans-serif; cursor: pointer; }
 .builds__controls button[aria-disabled=true] { opacity: .45; }
-.builds__controls button:hover:not([aria-disabled=true]) { background: var(--ink); color: var(--orange); }
+@media (hover: hover) {
+  .builds__controls button:hover:not([aria-disabled=true]) { background: var(--ink); color: var(--orange); }
+}
+@media (min-height: 620px) and (prefers-reduced-motion: no-preference) {
+  .builds {
+    height: 290svh;
+    scroll-margin-top: -96px;
+  }
+  .builds__stage { position: sticky; top: 0; height: 100svh; padding-block: 72px 18px; }
+  .builds__paper { height: 100%; }
+  .builds__strip { overflow: hidden; scroll-snap-type: none; }
+  .builds__hint { display: inline; }
+}
 @media (min-width: 901px) and (min-height: 680px) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .marks-wrap { height: 210vh; }
   .builds {
@@ -115,9 +129,8 @@
     scroll-margin-top: calc(-50vh - 96px);
     background: transparent;
   }
-  .builds__stage { position: sticky; top: 0; height: 100vh; padding-block: 78px 36px; overflow: clip; }
-  .builds__paper { height: 100%; transform: translate3d(var(--arrival, 0%), 0, 0); }
-  .builds__strip { overflow: hidden; scroll-snap-type: none; }
+  .builds__stage { height: 100vh; padding-block: 78px 36px; overflow: clip; }
+  .builds__paper { transform: translate3d(var(--arrival, 0%), 0, 0); }
 }
 @media (max-width: 900px) {
   .site-header { gap: 18px; padding: 8px 20px; min-height: 58px; }
@@ -135,6 +148,11 @@
   .builds__slide { grid-template-columns: minmax(0,1fr); align-content: start; gap: 18px; padding-block: 28px; }
   .builds__slide h3 { font-size: clamp(36px, 7vw, 54px); }
   .builds__details ul { margin: 14px 0 6px; }
+}
+@media (max-width: 900px) and (min-height: 620px) and (prefers-reduced-motion: no-preference) {
+  .builds__paper { padding-block: clamp(18px, 3svh, 32px) 16px; }
+  .builds__slide { padding-block: 18px; gap: 12px; align-content: center; }
+  .builds__slide h3 { font-size: clamp(29px, 7vw, 54px); }
 }
 @media (prefers-reduced-motion: no-preference) {
   .intro__photo { animation: portrait-arrival .65s ease-out 1.15s backwards; }
