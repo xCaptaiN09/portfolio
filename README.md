@@ -15,7 +15,7 @@ Brutalist personal portfolio for Muhammed Dilshad A ([@xCaptaiN09](https://githu
 ### Getting Started
 
 ```bash
-git clone [https://github.com/xCaptaiN09/portfolio.git](https://github.com/xCaptaiN09/portfolio.git)
+git clone https://github.com/xCaptaiN09/portfolio.git
 cd portfolio
 npm install
 npm run dev
