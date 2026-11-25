@@ -1,46 +1,75 @@
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import { clamp } from '../utils/clamp'
+
+const portraitScale = 1.28
 
 export function BrandFlyer() {
-  const ref = useRef<HTMLDivElement>(null)
+  const slot = useRef<HTMLSpanElement>(null)
+  const badge = useRef<HTMLAnchorElement>(null)
 
-  useEffect(() => {
-    const flyer = ref.current
-    const handle = document.querySelector<HTMLElement>('.hero__brand')
-    const home = document.querySelector<HTMLAnchorElement>('.site-header .logo')
-    if (!flyer || !handle || !home) return
-    const motion = window.matchMedia('(prefers-reduced-motion: no-preference)')
+  useLayoutEffect(() => {
+    const home = slot.current
+    const link = badge.current
+    const origin = document.querySelector<HTMLElement>('.intro__brand-origin')
+    if (!link || !home || !origin) return
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
     let frame = 0
-    const update = () => {
-      frame = 0
-      const progress = Math.min(1, window.scrollY / (window.innerHeight * 0.55))
-      const flying = motion.matches && progress > 0 && progress < 1
-      flyer.style.opacity = flying ? '1' : '0'
-      handle.style.opacity = flying ? '0' : ''
-      home.classList.toggle('logo--flying', flying)
-      if (!flying) return
+    let travel = 1
+    let x = 0
+    let y = 0
 
-      const from = handle.getBoundingClientRect()
-      const to = home.getBoundingClientRect()
-      const p = progress * progress * (3 - 2 * progress)
-      const x = from.left + (to.left - from.left) * p
-      const y = from.top + (to.top - from.top) * p
-      const scale = 1 + (to.height / from.height - 1) * p
-      flyer.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`
+    const render = () => {
+      const scroll = Math.max(0, window.scrollY)
+      const progress = clamp(scroll / travel)
+      const remaining = reduced.matches ? (progress < 1 ? 1 : 0) : Math.pow(1 - progress, 2.4)
+      if (remaining === 0) {
+        link.style.removeProperty('transform')
+        return
+      }
+
+      const offsetY = (y - scroll) * remaining
+      const scale = 1 + (portraitScale - 1) * remaining
+      link.style.transform = `translate3d(${x * remaining}px, ${offsetY}px, 0) scale(${scale})`
     }
-    const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
-    update()
+
+    const measure = () => {
+      const start = origin.getBoundingClientRect()
+      const end = home.getBoundingClientRect()
+      x = start.left - end.left
+      y = start.top + window.scrollY + (start.height - end.height * portraitScale) / 2 - end.top
+      travel = clamp(y * 0.72, 160, 500)
+      render()
+    }
+
+    const schedule = () => {
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        render()
+      })
+    }
+    const observer = new ResizeObserver(measure)
+    observer.observe(origin.closest('.intro__layout') ?? origin)
+    observer.observe(home)
+    measure()
     window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', schedule)
-    motion.addEventListener('change', schedule)
+    window.addEventListener('resize', measure)
+    reduced.addEventListener('change', schedule)
     return () => {
       cancelAnimationFrame(frame)
+      observer.disconnect()
       window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', schedule)
-      motion.removeEventListener('change', schedule)
-      home.classList.remove('logo--flying')
-      handle.style.opacity = ''
+      window.removeEventListener('resize', measure)
+      reduced.removeEventListener('change', schedule)
     }
   }, [])
 
-  return <div className="brand-flyer" ref={ref} aria-hidden="true"><span className="dot" />xCaptaiN09</div>
+  return (
+    <span className="brand-slot" ref={slot}>
+      <a className="logo" ref={badge} href="#top" aria-label="xCaptaiN09 home">
+        <span className="logo__mark" />xCaptaiN09
+      </a>
+    </span>
+  )
 }

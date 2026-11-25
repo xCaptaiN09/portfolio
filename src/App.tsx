@@ -5,7 +5,6 @@ import { ClientWork } from './components/ClientWork'
 import { Contact } from './components/Contact'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { BrandFlyer } from './components/BrandFlyer'
 import { ScrollCursor } from './components/ScrollCursor'
 import { Interstitial } from './components/Interstitial'
 import { MarqueeBand } from './components/MarqueeBand'
@@ -20,7 +19,7 @@ import { CursorDot } from './components/CursorDot'
 import { PortfolioBackground } from './components/PortfolioBackground'
 
 export default function App() {
-  useLenis()
+  const scrollTo = useLenis()
   useTextMotion()
   useScrollDriver()
 
@@ -34,13 +33,12 @@ export default function App() {
 
       <main id="top" className="page">
         <Hero />
-        <BrandFlyer />
         <ScrollCursor />
         <Statement />
         <Interstitial />
         <Skills />
         <MarksSection />
-        <ProjectsSection />
+        <ProjectsSection scrollTo={scrollTo} />
         <ClientWork />
         <RecordSection />
         <MarqueeBand />

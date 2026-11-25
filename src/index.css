@@ -3555,47 +3555,6 @@ section:has(.client-orb) {
   }
 }
 
-.hero__brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: clamp(20px, 3.5vh, 40px);
-  font-family: 'Geist Mono', monospace;
-  font-weight: 700;
-  font-size: clamp(20px, 2vw, 32px);
-  letter-spacing: .02em;
-  color: var(--cream);
-  width: fit-content;
-}
-
-.hero__brand .dot,
-.brand-flyer .dot {
-  width: .5em;
-  height: .5em;
-  border-radius: 50%;
-  background: var(--orange);
-  flex: none;
-}
-
-.brand-flyer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 80;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-family: 'Geist Mono', monospace;
-  font-weight: 700;
-  font-size: clamp(20px, 2vw, 32px);
-  letter-spacing: .02em;
-  color: var(--cream);
-  transform-origin: 0 0;
-  opacity: 0;
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
 .glow-dot {
   animation: dot-glow 2.4s ease-in-out infinite;
 }
@@ -3615,21 +3574,6 @@ section:has(.client-orb) {
 .hero__core-col {
   display: flex;
   flex-direction: column;
-}
-
-.hero__brand {
-  margin-top: clamp(10px, 1.8vh, 18px);
-  font-size: clamp(17px, 1.6vw, 26px);
-}
-
-.brand-flyer {
-  font-size: clamp(17px, 1.6vw, 26px);
-  will-change: transform, opacity;
-  color: var(--cream);
-}
-
-.brand-flyer[data-header="light"] {
-  color: #0b0b0c;
 }
 
 html {
@@ -3688,10 +3632,6 @@ body[data-cursor-box="invert"] .scroll-cursor__box {
     bottom: 128px;
     left: 18px;
     right: 18px;
-  }
-
-  .hero__brand {
-    margin-top: 18px;
   }
 
   .hero__foot {

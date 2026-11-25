@@ -19,7 +19,10 @@ export function Hero() {
         </div>
         <figure className="intro__portrait">
           <PortraitPlate />
-          <figcaption><span className="hero__brand"><span className="dot" />xCaptaiN09</span><span>Kozhikode, India</span></figcaption>
+          <figcaption>
+            <span className="intro__brand-origin" aria-hidden="true" />
+            <span>Kozhikode, India</span>
+          </figcaption>
         </figure>
       </div>
       <div className="marquee intro__marquee" aria-hidden="true">

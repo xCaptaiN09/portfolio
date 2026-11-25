@@ -3,9 +3,14 @@ import { projects } from '../data/projects'
 import { GithubOrb } from './GithubOrb'
 import { clamp } from '../utils/clamp'
 
-const pinnedQuery = '(min-width: 901px) and (min-height: 680px) and (prefers-reduced-motion: no-preference)'
+const pinnedQuery = '(min-width: 901px) and (min-height: 680px) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
 
-export function ProjectsSection() {
+// The first half-screen of pinned scroll is reserved for the panel entrance.
+function arrivalDistance() {
+  return window.innerHeight / 2
+}
+
+export function ProjectsSection({ scrollTo }: { scrollTo: (top: number) => void }) {
   const section = useRef<HTMLElement>(null)
   const strip = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
@@ -23,14 +28,15 @@ export function ProjectsSection() {
         return
       }
       const { top, height } = el.getBoundingClientRect()
-      const vh = window.innerHeight
-      const progress = clamp(-top / Math.max(1, height - vh))
-      const arrival = clamp((top - 80) / (vh - 80))
-      el.style.setProperty('--arrival', String(arrival * 100) + '%')
-      // Hold each project in place long enough to read between horizontal transitions.
-      const position = progress * (projects.length - 1)
+      const entry = arrivalDistance()
+      const arrival = clamp(-top / entry)
+      const offset = Math.pow(1 - arrival, 2)
+      el.style.setProperty('--arrival', `${offset * 108}%`)
+
+      const travel = Math.max(1, height - window.innerHeight - entry)
+      const position = clamp((-top - entry) / travel) * (projects.length - 1)
       const index = Math.floor(position)
-      const transition = clamp((position - index - 0.35) / 0.3)
+      const transition = clamp((position - index - 0.12) / 0.76)
       const eased = transition * transition * (3 - 2 * transition)
       track.scrollLeft = (index + eased) * track.clientWidth
     }
@@ -53,7 +59,9 @@ export function ProjectsSection() {
     if (!el || !track || index < 0 || index >= projects.length) return
     if (window.matchMedia(pinnedQuery).matches) {
       const top = window.scrollY + el.getBoundingClientRect().top
-      window.scrollTo({ top: top + index / (projects.length - 1) * (el.offsetHeight - innerHeight), behavior: 'instant' })
+      const entry = arrivalDistance()
+      const travel = el.offsetHeight - innerHeight - entry
+      scrollTo(top + entry + index / (projects.length - 1) * travel)
     } else {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
       track.scrollTo({ left: index * track.clientWidth, behavior: reduce ? 'instant' : 'smooth' })

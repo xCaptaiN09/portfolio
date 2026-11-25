@@ -28,15 +28,22 @@
 }
 .intro__copy p { margin: 22px 0 0; max-width: 39ch; font-size: clamp(16px, 1.25vw, 21px); line-height: 1.55; }
 .intro__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 26px; }
-.intro__work, .intro__contact { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; }
-.intro__work { padding: 0 19px; color: var(--ink); background: var(--orange); border-radius: 4px; }
-.intro__work:hover { background: var(--cream); }
-.intro__contact { text-decoration: underline; text-underline-offset: .3em; }
+.intro__actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: .3em;
+}
+.intro__work { color: var(--orange); }
+.intro__actions a:hover { text-decoration-thickness: 2px; }
 .intro__portrait { grid-area: portrait; margin: 0; }
 .intro__photo { width: 100%; height: auto; aspect-ratio: 1.4; object-fit: cover; object-position: center; filter: grayscale(1); }
-.intro__portrait figcaption { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-top: 12px; font: 12px 'Geist Mono', monospace; }
-.intro__portrait .hero__brand, .brand-flyer { margin: 0; gap: 8px; font: 700 14px 'Geist Mono', monospace; }
-.logo--flying:not(:focus-visible) { opacity: 0; }
+.intro__portrait figcaption { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 12px; font: 12px 'Geist Mono', monospace; }
+.intro__brand-origin { width: 0; height: 27px; }
+.brand-slot { display: block; width: max-content; }
+.brand-slot .logo { transform-origin: top left; }
 .intro__marquee { transform: none; z-index: 1; padding-block: 12px; }
 .intro__marquee .marquee__group { font: 700 clamp(22px, 2.5vw, 42px)/1 'Instrument Sans', sans-serif; }
 .intro__separator { margin-inline: .65em; }
@@ -100,16 +107,21 @@
 .builds__controls button { width: 46px; height: 44px; border: 1px solid currentColor; border-radius: 50%; font: 22px/1 'Geist', sans-serif; cursor: pointer; }
 .builds__controls button[aria-disabled=true] { opacity: .45; }
 .builds__controls button:hover:not([aria-disabled=true]) { background: var(--ink); color: var(--orange); }
-@media (min-width: 901px) and (min-height: 680px) and (prefers-reduced-motion: no-preference) {
-  .marks-wrap { height: 170vh; }
-  .builds { height: 400vh; margin-top: -70vh; background: transparent; }
+@media (min-width: 901px) and (min-height: 680px) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .marks-wrap { height: 210vh; }
+  .builds {
+    height: 450vh;
+    margin-top: -150vh;
+    scroll-margin-top: calc(-50vh - 96px);
+    background: transparent;
+  }
   .builds__stage { position: sticky; top: 0; height: 100vh; padding-block: 78px 36px; overflow: clip; }
-  .builds__paper { height: 100%; transform: translateX(var(--arrival, 0%)); }
+  .builds__paper { height: 100%; transform: translate3d(var(--arrival, 0%), 0, 0); }
   .builds__strip { overflow: hidden; scroll-snap-type: none; }
 }
 @media (max-width: 900px) {
   .site-header { gap: 18px; padding: 8px 20px; min-height: 58px; }
-  .site-header .logo { margin-right: auto; }
+  .brand-slot { margin-right: auto; }
   .mobile-menu { display: block; position: relative; }
   .mobile-menu summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; list-style: none; }
   .mobile-menu summary::-webkit-details-marker { display: none; }
